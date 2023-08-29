@@ -8,6 +8,9 @@
     flake-utils.lib.eachDefaultSystem (system:
       let pkgs = nixpkgs.legacyPackages.${system};
       in {
-        devShell = pkgs.mkShell { buildInputs = [ ]; };
+        packages.${system}.default = pkgs.stdenv.mkDerivation { 
+          name = "impure.systems";
+          src = ./.;
+        };
       });
 }
