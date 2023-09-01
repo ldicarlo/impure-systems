@@ -8,33 +8,31 @@
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = import nixpkgs { inherit system; };
-      in
-      rec
-      {
-        defaultPackage = pkgs.stdenv.mkDerivation rec {
-          name = "impure.systems";
-          src = ./.;
-          installPhase = ''
-            # Build the site to the $out directory
-            export JEKYLL_ENV=production
-            ${pkgs.jekyll}/bin/jekyll build --destination $out
-          '';
-        };
-        devShells.default = pkgs.mkShell
+        env = pkgs.bundlerEnv
           {
+            name = "impure-systems";
+            gemfile = ./Gemfile;
+            lockfile = ./Gemfile.lock;
+            gemset = ./gemset.nix;
+          };
+      in
+      rec {
+        defaultPackage = pkgs.stdenv.mkDerivation
+          {
+            name = "env";
 
-            buildInputs = [
-              pkgs.jekyll
-              pkgs.bundler
-              (pkgs.writeShellScriptBin
-                "serve"
-                ''
-                  echo "Running server: visit http://localhost:8000/example/index.html"
-                  ${pkgs.bundler}/bin/bundler install
-                  ${pkgs.jekyll}/bin/jekyll serve .
-                '')
+            buildInputs = with pkgs; [
+              libxslt
+              ruby
+              bashInteractive
+              zlib
+              pkg-config
+              libxml2
+              bundler
+              jekyll
             ];
           };
       }
+
     );
 }
