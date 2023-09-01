@@ -30,6 +30,7 @@
               libxml2
               bundler
               jekyll
+              rubyPackages.jekyll-feed
             ];
           };
       }
