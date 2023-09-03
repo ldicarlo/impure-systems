@@ -20,6 +20,7 @@
         defaultPackage = pkgs.stdenv.mkDerivation
           {
             name = "env";
+            src = ./.;
 
             buildInputs = with pkgs; [
               libxslt
@@ -32,6 +33,8 @@
               jekyll
               rubyPackages.jekyll-feed
             ];
+
+
           };
       }
 
