@@ -23,7 +23,7 @@
             buildInputs = [ pkgs.bundix ];
           };
         defaultPackage = pkgs.stdenv.mkDerivation {
-          name = "app";
+          name = "impure-systems";
 
           src = self;
           buildInputs = with pkgs; [
