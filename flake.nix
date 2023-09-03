@@ -22,7 +22,7 @@
           pkgs.mkShell {
             buildInputs = [ pkgs.bundix ];
           };
-        defaultPackage = pkgs.stdenv.mkDerivation {
+        packages.${system}.default = pkgs.stdenv.mkDerivation {
           name = "impure-systems";
 
           src = self;
