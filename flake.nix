@@ -7,35 +7,37 @@
   outputs = { self, nixpkgs, flake-utils }:
     flake-utils.lib.eachDefaultSystem (system:
       let
-        pkgs = import nixpkgs { inherit system; };
+        pkgs = nixpkgs.legacyPackages.${system};
         env = pkgs.bundlerEnv
           {
-            name = "impure-systems";
+            name = "env";
+            ruby = pkgs.ruby;
             gemfile = ./Gemfile;
             lockfile = ./Gemfile.lock;
             gemset = ./gemset.nix;
           };
       in
-      rec {
-        defaultPackage = pkgs.stdenv.mkDerivation
-          {
-            name = "env";
-            src = ./.;
-
-            buildInputs = with pkgs; [
-              libxslt
-              ruby
-              bashInteractive
-              zlib
-              pkg-config
-              libxml2
-              bundler
-              jekyll
-              rubyPackages.jekyll-feed
-            ];
-
-
+      rec  {
+        devShells.default =
+          pkgs.mkShell {
+            buildInputs = [ pkgs.bundix ];
           };
+        defaultPackage = pkgs.stdenv.mkDerivation {
+          name = "app";
+
+          src = self;
+          buildInputs = with pkgs; [
+            env
+          ];
+
+          buildPhase = ''
+            ${env}/bin/jekyll build
+          '';
+          installPhase = ''
+            mkdir -p $out
+            cp -r _site $out/_site
+          '';
+        };
       }
 
     );
