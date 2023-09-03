@@ -11,7 +11,7 @@
       env = pkgs.bundlerEnv
         {
           name = "env";
-          ruby = pkgs.ruby;
+          ruby = pkgs.ruby_3_2;
           gemfile = ./Gemfile;
           lockfile = ./Gemfile.lock;
           gemset = ./gemset.nix;
@@ -21,7 +21,7 @@
     rec  {
       devShells.default =
         pkgs.mkShell {
-          buildInputs = [ pkgs.bundix ];
+          buildInputs = [ pkgs.bundix env ];
         };
       packages.${system}.default = pkgs.stdenv.mkDerivation {
         name = "impure-systems";

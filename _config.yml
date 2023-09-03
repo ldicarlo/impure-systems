@@ -21,7 +21,7 @@
 title: IMPURE SYSTEMS
 email: luca@di-carlo.fr
 description: >- # this means to ignore newlines until "baseurl:"
-  I blog about tech and children.
+  I blog about tech, children and stuff.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://impure.systems" # the base hostname & protocol for your site, e.g. http://example.com
 github_username: ldicarlo
@@ -39,7 +39,12 @@ theme: minima
 # Excluded items can be processed by explicitly listing the directories or
 # their entries' file path in the `include:` list.
 #
-# exclude:
+exclude:
+  - flake.lock
+  - flake.nix
+  - README.md
+  - gemset.nix
+  - .envrc
 #   - .sass-cache/
 #   - .jekyll-cache/
 #   - gemfiles/
