@@ -4,7 +4,7 @@ on: [push]
 
 jobs:
   Explore-Gitea-Actions:
-    runs-on: nixos
+    runs-on: gitea-latest
     steps:
       - run: echo "🎉 The job was automatically triggered by a ${{ gitea.event_name }} event."
       - run: echo "🐧 This job is now running at a ${{ runner.os }} server hosted by Gitea!"
