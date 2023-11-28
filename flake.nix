@@ -13,9 +13,9 @@
           src = ./jekyll;
           name = "env";
           ruby = pkgs.ruby_3_2;
-          gemfile = ./Gemfile;
-          lockfile = ./Gemfile.lock;
-          gemset = ./gemset.nix;
+          gemfile = ./jekyll/Gemfile;
+          lockfile = ./jekyll/Gemfile.lock;
+          gemset = ./jekyll/gemset.nix;
         };
       inherit (pkgs) stdenv lib;
     in
