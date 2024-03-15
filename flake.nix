@@ -10,23 +10,25 @@
       pkgs = nixpkgs.legacyPackages.${system};
       env = pkgs.bundlerEnv
         {
+          src = ./jekyll;
           name = "env";
           ruby = pkgs.ruby_3_2;
-          gemfile = ./Gemfile;
-          lockfile = ./Gemfile.lock;
-          gemset = ./gemset.nix;
+          gemfile = ./jekyll/Gemfile;
+          lockfile = ./jekyll/Gemfile.lock;
+          gemset = ./jekyll/gemset.nix;
         };
       inherit (pkgs) stdenv lib;
     in
     rec  {
-      devShells.default =
+      devShells.${system}.default =
         pkgs.mkShell {
-          buildInputs = [ pkgs.bundix env ];
+          test = '''';
+          buildInputs = [ pkgs.bundix env pkgs.hugo ];
         };
       packages.${system}.default = pkgs.stdenv.mkDerivation {
         name = "impure-systems";
 
-        src = self;
+        src = ./jekyll;
         buildInputs = with pkgs; [
           env
         ];
@@ -42,3 +44,4 @@
     };
 
 }
+

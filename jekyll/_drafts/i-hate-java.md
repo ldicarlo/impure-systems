@@ -1,16 +1,8 @@
 ---
 layout: post
 title:  "after 7 years, I hate Java"
-categories: "java is bad"
+categories: "I hate Java"
 ---
-
-I wanted to begin my blog by this post.
-
-I just finished a contract in java, and looking forward to begin a new one in Haskell.
-
-After 7 years of java (even OCP certified), I want to say that I hate it.
-
-In my previous job we used Vavr(link) to counter OOP in the code.
 
 # OOP is bad, Mutability is worse
 
@@ -25,15 +17,6 @@ But the guys at java prevented that:
 Look here: https://docs.oracle.com/javase/8/docs/api/java/util/Set.html
 
 (link image)
-
-# Setters and Getters
-
-We use Getters and Setters to access data. Everybody will tell you to use them.
-
-The reason _may_ be that some dinosaures decennies ago decided that maybe you could put some business inside these accessors.
-Nobody ever put business in it, because:
-- first of all this is an anti-pattern, since you don't want to hide business in a function called `getStuff()` or `setStuff()`
-- second we all use Lombok to .. autogenerate these accessors, so we don't need to write them manually. This is an aberration, why use them at all then ??
 
 # Sonar 01: parameters numbers
 
